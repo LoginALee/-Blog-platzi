@@ -24,9 +24,6 @@ class Usuarios extends Component{
     return <Tabla />
   }
 
-
-  
-
   render(){
     return (
       <div>
