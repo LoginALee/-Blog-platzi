@@ -88,7 +88,7 @@ class Publicaciones extends Component{
         const { publicaciones_key } = usuarios[key]; 
 
         return publicaciones[publicaciones_key].map((publicacion) => (
-            <div className='publicaciones_titulo'>
+            <div className='publicaciones_titulo' key={ publicacion.id } onClick={ ()=> alert(publicacion.id)}>
                 <h2>{ publicacion.title }</h2>
                 <h3>{ publicacion.body }</h3>
             </div>
