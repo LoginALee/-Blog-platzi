@@ -98,16 +98,18 @@ class Publicaciones extends Component{
         publicaciones.map((publicacion, com_key) => (
             <div className='publicaciones_titulo'
                 key={ publicacion.id } 
-                onClick={ ()=> this.props.mostrarComentarios(pub_key, com_key, publicacion.comentarios)}>
+                onClick={ ()=> this.mostrarComentarios(pub_key, com_key, publicacion.comentarios)}>
                 <h2>{ publicacion.title }</h2>
                 <h3>{ publicacion.body }</h3>
-                {(publicacion.abierto) ? <Comentarios /> : ''}
+                {(publicacion.abierto) ? <Comentarios comentarios={publicacion.comentarios} /> : ''}
             </div>
     )));
     
-    mostrarComentarios = (pub_key, com_key, Comentarios) => {
+    mostrarComentarios = (pub_key, com_key, comentarios) => {
         this.props.abrirCerrar(pub_key, com_key);
-        this.props.traerComentarios(pub_key, com_key);
+        if(!comentarios.length) {
+            this.props.traerComentarios(pub_key, com_key);
+        }
 
     };
 
