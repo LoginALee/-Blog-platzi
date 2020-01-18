@@ -97,6 +97,7 @@ class Publicaciones extends Component{
                 onClick={ ()=> this.props.abrirCerrar(pub_key, com_key)}>
                 <h2>{ publicacion.title }</h2>
                 <h3>{ publicacion.body }</h3>
+                {(publicacion.abierto) ? 'abierto' : 'cerrado'}
             </div>
     )));
 
