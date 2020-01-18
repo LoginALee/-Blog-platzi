@@ -2,12 +2,16 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Spinner from '../general/Spinner';
 import Fatal from '../general/Fatal';
+import Comentarios from './Comentarios';
 
 import * as usuariosActions  from "../../actions/usuariosActions";
 import * as publicacionesActions  from "../../actions/publicacionesActions";
 
 const {traerTodos: usuariosTraerTodos} = usuariosActions;
-const {traerPorUsuario: publicacionesTraerPorUsuario, abrirCerrar} = publicacionesActions;
+const {traerPorUsuario: 
+        publicacionesTraerPorUsuario,
+        abrirCerrar,
+        traerComentarios} = publicacionesActions;
 
 
 class Publicaciones extends Component{
@@ -94,12 +98,18 @@ class Publicaciones extends Component{
         publicaciones.map((publicacion, com_key) => (
             <div className='publicaciones_titulo'
                 key={ publicacion.id } 
-                onClick={ ()=> this.props.abrirCerrar(pub_key, com_key)}>
+                onClick={ ()=> this.props.mostrarComentarios(pub_key, com_key, publicacion.comentarios)}>
                 <h2>{ publicacion.title }</h2>
                 <h3>{ publicacion.body }</h3>
-                {(publicacion.abierto) ? 'abierto' : 'cerrado'}
+                {(publicacion.abierto) ? <Comentarios /> : ''}
             </div>
     )));
+    
+    mostrarComentarios = (pub_key, com_key, Comentarios) => {
+        this.props.abrirCerrar(pub_key, com_key);
+        this.props.traerComentarios(pub_key, com_key);
+
+    };
 
     render(){
         console.log(this.props);
@@ -123,7 +133,8 @@ const mapStateToProps = ({usuariosReducer, publicacionesReducer}) => {
 const mapDispatchToProps = {
     usuariosTraerTodos,
     publicacionesTraerPorUsuario,
-    abrirCerrar
+    abrirCerrar,
+    traerComentarios
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Publicaciones);
