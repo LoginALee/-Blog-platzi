@@ -31,7 +31,7 @@ class Publicaciones extends Component{
         }
 
         if(!('publicaciones_key' in this.props.usuariosReducer.usuarios[key])){
-            publicacionesTraerPorUsuario(key);
+            await publicacionesTraerPorUsuario(key);
         }
     }
 
