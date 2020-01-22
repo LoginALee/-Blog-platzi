@@ -3,7 +3,9 @@ import { TRAER_TODAS, CARGANDO, ERROR } from "../types/tareasTypes";
 const INITIAL_STATE = {
     tareas: {},
     cargando: false,
-    error: ''
+    error: '',
+    usuario_id: '',
+    titulo: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -28,6 +30,18 @@ export default (state = INITIAL_STATE, action) => {
                 error: action.payload,
                 cargando: false
             };
+
+        case 'cambio_usuario_id':
+            return {
+                ...state,
+                usuario_id: action.payload
+            }
+
+        case 'cambio_titulo':
+            return {
+                ...state,
+                titulo: action.payload
+            }
 
         default:
             return state;
